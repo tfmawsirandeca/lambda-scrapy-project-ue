@@ -1,0 +1,79 @@
+{
+	"results": [
+		{
+			"price_forecasted": 1.0770650193621558,
+			"ingredient": "CALAMAR",
+            "unit_measurement": "1kg"
+		},
+		{
+			"price_forecasted": 0.18070065534151072,
+			"ingredient": "SAL",
+            "unit_measurement": "1g"
+		},
+		{
+			"price_forecasted": 0.20419259208253285,
+			"ingredient": "PEPINO",
+            "unit_measurement": "1kg"
+		},
+		{
+			"price_forecasted": 1.309058650917333,
+			"ingredient": "CARNE",
+            "unit_measurement": "1kg"
+		},
+		{
+			"price_forecasted": 1.1034049832349553,
+			"ingredient": "JAMON",
+            "unit_measurement": "1kg"
+		},
+		{
+			"price_forecasted": 0.3246496946302709,
+			"ingredient": "PATATAS",
+            "unit_measurement": "1kg"
+		},
+		{
+			"price_forecasted": 0.789953963509029,
+			"ingredient": "CEBOLLA",
+            "unit_measurement": "1kg"
+		},
+		{
+			"price_forecasted": 0.1888981535126599,
+			"ingredient": "ACEITE_OLIVA",
+            "unit_measurement": "1L"
+		},
+		{
+			"price_forecasted": -0.14962782651564693,
+			"ingredient": "CAMARON",
+            "unit_measurement": "1kg"
+		},
+		{
+			"price_forecasted": 0.4875928544466965,
+			"ingredient": "TOMATE",
+            "unit_measurement": "1kg"
+		},
+		{
+			"price_forecasted": 3.8479980727055594,
+			"ingredient": "AJO",
+            "unit_measurement": "5kg"
+		},
+		{
+			"price_forecasted": 3.2516448819495825,
+			"ingredient": "HUEVO",
+            "unit_measurement": "100kg"
+		},
+		{
+			"price_forecasted": 0.5759765046652252,
+			"ingredient": "PIMIENTO",
+            "unit_measurement": "1kg"
+		},
+		{
+			"price_forecasted": 4662213020203824,
+			"ingredient": "PAN",
+            "unit_measurement": "1UNIDAD"
+		},
+		{
+			"price_forecasted": 2.1230129783982354,
+			"ingredient": "ARROZ",
+            "unit_measurement": "1TONELADA"
+		}
+	]
+}
