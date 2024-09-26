@@ -1,15 +1,11 @@
 version = 0.1
-
-[default]
-[default.deploy]
 [default.deploy.parameters]
 stack_name = "web-scraping-stack"
-s3_bucket = "bk-price-prediction-data"
+#s3_bucket = "bk-price-prediction-data"
+resolve_s3 = true
 s3_prefix = "web-scraping-stack"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
-no_fail_on_empty_changeset = false
 disable_rollback = true
-resolve_s3 = true
 image_repositories = []

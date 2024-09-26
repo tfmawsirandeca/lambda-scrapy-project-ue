@@ -1,20 +1,86 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
-Description: web_scraping_project
+Description: >
+  web_scraping_project #magic___^_^___line
+Globals:
+  Function:
+    Timeout: 300
+    MemorySize: 512
+
+    Tracing: Active
+    # You can add LoggingConfig parameters such as the Logformat, Log Group, and SystemLogLevel or ApplicationLogLevel. Learn more here https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-loggingconfig.
+    LoggingConfig:
+      LogFormat: JSON
+  Api:
+    TracingEnabled: true
+    Cors:
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+      AllowOrigin: "'*'"
+
 Resources:
   WebScrapingFunction:
-    Type: 'AWS::Serverless::Function'
+    Type: AWS::Serverless::Function
     Properties:
       Handler: handler.lambda_handler
       Runtime: python3.9
       CodeUri: .
-      MemorySize: 512
-      Timeout: 300
-      Policies:
-      - AWSLambdaBasicExecutionRole
+      # Policies:
+      # - AWSLambdaBasicExecutionRole
+      Role: !GetAtt WebScrapingFunctionRole.Arn
       Events:
-        WebScrapingApi:
+        CatchAll:
           Type: Api
           Properties:
             Path: /webscraping
-            Method: post
+            Method: POST
+
+  WebScrapingFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: lambda.amazonaws.com
+          Action: sts:AssumeRole
+      Policies:
+      - PolicyName: WebScrapingFunctionPolicy
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            Resource: arn:aws:logs:*:*:*
+          - Effect: Allow
+            Action: events:PutEvents
+            Resource: "*"
+
+  ApplicationResourceGroup:
+    Type: AWS::ResourceGroups::Group
+    Properties:
+      Name:
+        Fn::Sub: ApplicationInsights-SAM-${AWS::StackName}
+      ResourceQuery:
+        Type: CLOUDFORMATION_STACK_1_0
+  ApplicationInsightsMonitoring:
+    Type: AWS::ApplicationInsights::Application
+    Properties:
+      ResourceGroupName:
+        Ref: ApplicationResourceGroup
+      AutoConfigurationEnabled: 'true'
+
+Outputs:
+  MenuAPI:
+    Description: "API Gateway endpoint URL for Prod stage"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
+  WebScrapingFunction:
+    Description: First Lambda Function ARN
+    Value: !GetAtt WebScrapingFunction.Arn
+  WebScrapingFunctionIamRole:
+    Description: Implicit IAM Role created for web scraping function
+    Value: !GetAtt WebScrapingFunctionRole.Arn
